@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>My Portfolio</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+  <style>
+        :root {
+      --bg-main: #f5f5f0;        /* cream */
+      --bg-card: #ffffff;         /* white */
+      --text-main: #222222;       /* almost black */
+      --text-muted: #555555;
+      --accent: #e0e0e0;          /* light grey */
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      transition: all 0.3s ease;
+    }
+
+    #chat-icon {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #0a979e;
+  color: white;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  font-size: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+  z-index: 1001;
+}
+
+#chat-popup {
+  display: none;
+  position: fixed;
+  bottom: 60px;
+  align-self: center;
+  width: 900px;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+  z-index: 1002;
+  backdrop-filter: blur(6px);
+  padding: 15px;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.chat-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.chat-body {
+  height: 250px;
+  border-left-width: 300px;
+  overflow-y: auto;
+  background-color: #eee;
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+#chat-popup input {
+  width: 65%;
+  padding: 8px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+#chat-popup button {
+  padding: 8px;
+  border: none;
+  background-color: #1585ab;
+  color: white;
+  border-radius: 5px;
+  margin-left: 5px;
+}
+
+#chat-icon:hover {
+  transform: translateY(-8px);
+      box-shadow: 0 8px 20px rgba(18, 18, 18, 0.922);
+}
+body.chat-open::before {
+  content: "";
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  backdrop-filter: blur(5px);
+  z-index: 1000;
+}
+
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #7e7d7c;
+      color: var(--text-main);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-bottom: 60px;
+    }
+
+    h1 {
+      margin-top: 40px;
+      font-size: 3rem;
+      font-weight: 700;
+      color: #000;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+
+    hr {
+      border: none;
+      height: 1px;
+      background: #ccc;
+      margin: 20px 0;
+      width: fit-content;
+    }
+
+    
+    .profile-pic {
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      overflow: hidden;
+      margin: 25px 0;
+      border: 5px solid #ccc;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    }
+    
+    .profile-pic img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .profile-pic:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 8px 20px rgba(18, 18, 18, 0.922);
+    }
+
+    .sections {
+      width: 90%;
+      max-width: 800px;
+    }
+
+    .section {
+      background: var(--bg-card);
+      margin: 14px 0;
+      padding: 22px;
+      border-radius: 14px;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+      border-left: 10px solid #1585ab;
+      transform: translateY(0);
+    }
+
+    .section:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 8px 20px rgba(18, 18, 18, 0.922);
+    }
+
+    .section h2 {
+      margin-top: 0;
+      font-size: 1.6rem;
+      color: var(--text-main);
+      border-bottom: 1px solid var(--accent);
+      padding-bottom: 6px;
+    }
+
+    ul {
+      padding-left: 20px;
+      margin-top: 10px;
+    }
+
+    a {
+      color: #000;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .social-icons {
+      margin: 40px 0 20px 0;
+    }
+
+    .social-icons a {
+      margin: 0 15px;
+      text-decoration: none;
+      font-size: 2rem;
+      color: #faf9f9;
+      transition: transform 0.2s ease, color 0.3s ease;
+    }
+
+    .social-icons a:hover {
+      transform: scale(1.2);
+    }
+
+    .insta:hover { color: #e4405f; }
+    .linkedin:hover { color: #0077b5; }
+    .whatsapp:hover { color: #25D366; }
+    .github:hover { color: rgb(11, 11, 11);}
+
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 2rem;
+      }
+      .profile-pic {
+        width: 140px;
+        height: 140px;
+      }
+      .section h2 {
+        font-size: 1.2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <h1 style="color: #302d2d;">My Portfolio</h1>
+  <div class="profile-pic">
+    <img src="https://drive.google.com/uc?export=view&id=17PI3eGCxQOgXJtgtGYNWQI2U-REs7j3w" alt="Profile Picture">
+  </div>
+
+<!-- Floating Chat Icon -->
+<div id="chat-icon" onclick="toggleChat()">
+  💬
+</div>
+
+<!-- Chat Popup -->
+<div id="chat-popup">
+  <div class="chat-header">
+    <span>Chatbot</span>
+    <button class="close-btn" onclick="toggleChat()">✖</button>
+  </div>
+
+  <div class="chat-intro">
+    <p><strong>Ask Me Anything</strong></p>
+  </div>
+
+  <div id="chat-box" class="chat-body"></div>
+  
+  <div class="chat-input">
+    <input type="text" id="userInput" placeholder="Type 'menu' to display menu..." />
+    <button onclick="sendMessage()">Send</button>
+  </div>
+</div>
+
+
+
+  <div class="sections">
+    <div class="section">
+      <h2>About</h2>
+      <p>Hello! I'm G Pavan Kumar, a final year AIML student passionate about AI, Python, and building intelligent systems. I enjoy solving real-world problems with code.</p>
+    </div>
+
+    <div class="section">
+      <h2>Contact Info</h2>
+      <p>Email: pavanreddygunata@gmail.com<br>
+         Phone: +91 6304189645<br>
+         Location: Chittoor, Andhra Pradesh</p>
+    </div>
+
+    <div class="section">
+      <h2>Resume</h2>
+      <p><a href="https://drive.google.com/file/d/17C6-xmwZR_e9RwXX0oFmQJ76JrRdN5-7/view?usp=sharing" target="_blank">Click here to view/download my resume</a></p>
+    </div>
+
+    <div class="section">
+      <h2>Skills</h2>
+      <ul>
+        <li>Python, Java, SQL</li>
+        <li>Machine Learning, Deep Learning, Data Analysis</li>
+        <li>Flask, React, HTML, CSS</li>
+      </ul>
+    </div>
+    
+    <div class="section">
+      <h2>Certificates</h2>
+      <ul>
+        <li><a href="https://drive.google.com/file/d/172IGN_8JZsyeDnxB_2dNhlGV-5HeUG08/view?usp=sharing">Google AI Essentials - Coursera</a></li>
+        <li><a href="https://drive.google.com/file/d/16xqpWWu9gyzpm397lr-l5roUgErp-W2M/view?usp=sharing">Data Analytics Job Simulation - Delloite</a></li>
+        <li><a href="https://drive.google.com/file/d/1EfOIA_rWYkdMKIPaAt-QMdcA1N7ZRKog/view?usp=sharing">Analyzing Data with R - IBM</a></li>
+        <li><a href="https://drive.google.com/file/d/1RTPe9nqifqBbkMpB9cdAoQXxC7TPuZAV/view?usp=sharing">Visualyzing Data with R - IBM</a></li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h2>Projects</h2>
+      <ul>
+        <li>Portfolio with Flask-based Chatbot</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="social-icons">
+    <a class="insta" href="https://www.instagram.com/yourprofile" target="_blank"><i class="fab fa-instagram"></i></a>
+    <a class="linkedin" href="https://www.linkedin.com/in/yourprofile" target="_blank"><i class="fab fa-linkedin"></i></a>
+    <a class="whatsapp" href="https://wa.me/916304189645" target="_blank"><i class="fab fa-whatsapp"></i></a>
+    <a class="github" href="https://wa.me/916304189645" target="_blank"><i class="fab fa-github"></i></a>
+  </div>
+
+</body>
+<script>
+  function toggleChat() {
+    const popup = document.getElementById("chat-popup");
+    const body = document.body;
+    const isOpen = popup.style.display === "block";
+    popup.style.display = isOpen ? "none" : "block";
+    body.classList.toggle("chat-open", !isOpen);
+  }
+
+  async function sendMessage() {
+    const input = document.getElementById("userInput").value;
+    if (!input.trim()) return;
+
+    const chatBox = document.getElementById("chat-box");
+    chatBox.innerHTML += `<p><strong>You:</strong> ${input}</p>`;
+
+    const res = await fetch("http://127.0.0.1:5000/chat", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ message: input })
+    });
+
+    const data = await res.json();
+    chatBox.innerHTML += `<p><strong>Bot:</strong> ${data.response}</p>`;
+    document.getElementById("userInput").value = "";
+    chatBox.scrollTop = chatBox.scrollHeight;
+  }
+</script>
+</html>
