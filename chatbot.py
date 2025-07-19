@@ -17,7 +17,7 @@ chatbot = {
 I'm passionate about building intelligent systems using Python, exploring ML, and creating real-world solutions.
 Looking for internships where I can grow professionally.""",
     "2": """Mail: pavanreddygunata@gmail.com
-Ph.no: +91 6304189645
+Ph.no: +91 6845*****
 Address: 23-338/2, Vidhyanagar Colony, K R Palli, Chittoor, Andhra Pradesh""",
     "3": """Skills: Python, HTML, CSS, JavaScript, React JS, NumPy, Pandas""",
     "4": """Certificates: Data Analytics Job Simulation,
